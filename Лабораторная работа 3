@@ -1,0 +1,61 @@
+#First task
+file = open('first.txt', 'w')
+text = input()
+file.write(text)
+file.close()
+file = open('first.txt', 'r')
+for line in file:
+    print( line.strip(" "))
+file.close()
+
+#Second task
+def write_array(array, file_name):
+    file.write('\n'.join(array))
+    file.close()
+n = int(input())
+zero = input()
+arr = [zero]
+for i in range(1, n):
+    i = input()
+    arr.append(i)
+file = open('first.txt', 'w')
+write_array(arr, file)
+file = open('first.txt', 'r')
+print(file.read())
+    
+#Third task
+import os
+import zipfile
+paths = input()
+
+f = True
+while f:
+    try:
+        os.chdir(os.path.abspath(paths))
+        f = False
+    except FileNotFoungError:
+        print('try other path')
+        paths = input()
+        
+filename = input()
+print(os.getcwd())
+
+f = True
+while f:
+    try:
+        with zipfile.ZipFile(name, 'r') as zip:
+            zip.extractall('main')
+            f = False
+    except FileNotFoundError:
+        print('try new path')
+        filename = input()
+        
+arr = []
+for current_dir, dirs, files in os.walk('main'):
+    if str(files).count('.py'):
+        arr.append(current_dir)
+        
+arr.sort()
+with open('first.txt', 'w') as file:
+    file.write('\n'.join(arr))
+    file.close()
