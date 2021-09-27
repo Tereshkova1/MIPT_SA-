@@ -1,0 +1,82 @@
+#First task
+import sys
+import argparse
+def createParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument ('-n')
+    
+    return parser
+if __name__ == '__main__':
+    prsr = createParser()
+    namespace = prsr.parse_args()
+    
+    fib1 = fib2 = 1
+ 
+    n = namespace.n
+        
+    n = int(n) - 2
+ 
+    while n > 0:
+        fib1, fib2 = fib2, fib1 + fib2
+        n -= 1
+ 
+    print("Значение этого элемента:", fib2)
+    
+#Second task
+def my_first_decorator(count_even):
+    def my_first_wrapper(arr):
+        s = count_even(arr)
+        if s == 0:
+            print('Нет(')
+        if s > 10:
+            print("Очень много")
+        return s
+    return my_first_wrapper
+@my_first_decorator
+def count_even(arr:list):
+    s = 0
+    for i in arr:
+        if i%2 == 0:
+            s+=1
+    return s
+
+arr = print()
+arr = map(int, input().split())
+print(count_even(arr))
+
+#Third task
+def swap(func):
+    def wrapped(*args, **kwargs):
+        arr = args[::-1]
+        return(func(*arr, **kwargs))
+    return wrapped    
+@swap
+def div(x, y, show=False):
+    res = x / y
+    if show:
+        print(res)
+    return res
+x, y = map(int, input().split())
+div(x, y, show = True)
+
+#Fourth task
+import time
+def decormaker(path:str):
+    def decoration(summ):
+        def wrapped(*args, **kwargs):
+            with open(path, 'w') as file:
+                tmp = time.ctime()
+                time.clock()
+                result = summ(*args, **kwargs)
+                arr = args
+                fullarr = [str(tmp), arr, result, time.clock(), alltime]
+                file.writeln("\n".join(fullarr))
+                file.close()
+            return(summ(*arr, **kwargs))
+        return(wrapped)
+    return(decoration)
+@decormaker('second.txt')
+def summ(a, b):
+    return a+b
+a, b = map(int, input().split())
+summ(a, b)
