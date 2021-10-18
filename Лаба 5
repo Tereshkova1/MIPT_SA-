@@ -35,3 +35,32 @@ mother = Mother('j', 'd','d')
 daughter = Daughter('j', 'd','d')
 polim(mother)
 polim(daughter)
+
+#Third task
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+        
+class Zebra(Animal):
+    __infoZebra = 'RunRunRun'
+    def about(self):
+        return 'Some info about Zebra: \n name:{} \n age: {} \n special info:{}'.format(self.name, self.age, self.__infoZebra)
+
+
+class Dolphin(Animal):
+    __infoDolphin = 'SwimSwimSwim'
+    def about(self):
+        return 'Some info about Dolphin: \n name:{} \n age: {} \n special info:{}'.format(self.name, self.age, self.__infoDolphin)
+def polim(a):
+    print(a.about())
+
+name=input()
+age = input()
+
+zebra = Zebra(name, age)
+dolphin = Dolphin(name, age)
+polim(zebra)
+polim(dolphin)
+    
